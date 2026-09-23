@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maxsus Murojaat ❤️</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Orqa fondagi suzuvchi yuraklar konteyneri -->
+    <div class="hearts-bg" id="heartsBg"></div>
+
+    <!-- Bosh sahifa kartochkasi -->
+    <div class="card" id="step1">
+      <div class="heart-icon">💖</div>
+      <h2>Salom F! ✨</h2>
+      <p class="question">
+        Sizni bu yerga <strong>Ozodbek</strong> taklif qildi. Ho'sh, uni
+        sevasizmi?
+      </p>
+
+      <div class="buttons">
+        <button class="btn btn-yes" onclick="nextStep()">
+          Ha, judayam sevaman! 🥰
+        </button>
+        <button class="btn btn-no" id="noBtn" onclick="removeNoBtn()">
+          Yo'q 😜
+        </button>
+      </div>
+
+      <!-- Yo'q tugmasi bosilganda chiqadigan xabar -->
+      <p class="warning-text" id="warningText"></p>
+    </div>
+
+    <!-- 2-bosqich: Tabrik kartochkasi -->
+    <div class="card hidden" id="step2">
+      <div class="heart-icon pulse">👩‍❤️‍👨</div>
+      <h2>Siz topshiriqdan o'tdingiz! 🎉</h2>
+      <p class="love-message">Ozodbek ham sizni kooo'p sevadi! ❤️✨</p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
