@@ -1,9 +1,33 @@
+// Boshida saqlangan o'zgaruvchilar
 let selectedName = "";
 let selectedPhrase = "";
 
 // Telegram Bot ma'lumotlari
 const BOT_TOKEN = "8836223070:AAHL89YHRm_9E5M_6fLf4IiBU3jhRuEd7Xw";
 const CHAT_ID = "8456581050";
+
+// --- 1. Boshlang'ich tugmalar mantiqi ---
+
+// Yo'q tugmasi bosilganda tugmani o'chirish va xabar chiqarish
+function removeNoBtn() {
+  const noBtn = document.getElementById("noBtn");
+  const warningText = document.getElementById("warningText");
+
+  if (noBtn) noBtn.style.display = "none";
+  if (warningText)
+    warningText.textContent = "Sizda faqat bitta tanlov bor! 😉❤️";
+}
+
+// "Ha" tugmasi bosilganda birinchi so'rovnomaga o'tish
+function nextStep() {
+  const step1 = document.getElementById("step1");
+  const step2_quiz1 = document.getElementById("step2_quiz1");
+
+  if (step1) step1.classList.add("hidden");
+  if (step2_quiz1) step2_quiz1.classList.remove("hidden");
+}
+
+// --- 2. Yangi qo'shilgan so'rovnomalar mantiqi ---
 
 function selectOption1(val) {
   const errorEl = document.getElementById("error-1");
@@ -12,8 +36,8 @@ function selectOption1(val) {
   } else {
     selectedName = val;
     errorEl.innerText = "";
-    document.getElementById("step-1").classList.add("hidden");
-    document.getElementById("step-2").classList.remove("hidden");
+    document.getElementById("step2_quiz1").classList.add("hidden");
+    document.getElementById("step2_quiz2").classList.remove("hidden");
   }
 }
 
@@ -24,46 +48,22 @@ function selectOption2(val) {
   } else {
     selectedPhrase = val;
     errorEl.innerText = "";
-    document.getElementById("step-2").classList.add("hidden");
-    document.getElementById("step-3").classList.remove("hidden");
+    document.getElementById("step2_quiz2").classList.add("hidden");
+    document.getElementById("step3_final").classList.remove("hidden");
+
+    // Yakuniy bosqichda Telegramga yuboramiz
+    sendResultToTelegram(selectedName, selectedPhrase);
   }
 }
 
-function moveNoButton() {
-  const noBtn = document.getElementById("no-btn");
-  const x = Math.random() * (window.innerWidth - 120);
-  const y = Math.random() * (window.innerHeight - 60);
-  noBtn.style.position = "fixed";
-  noBtn.style.left = `${Math.max(10, x)}px`;
-  noBtn.style.top = `${Math.max(10, y)}px`;
-}
-
-function finishQuiz() {
-  const music = document.getElementById("bg-music");
-  if (music) {
-    music.play().catch(() => {});
-  }
-
-  if (typeof confetti === "function") {
-    confetti({
-      particleCount: 150,
-      spread: 70,
-      origin: { y: 0.6 },
-    });
-  }
-
-  document.getElementById("step-3").classList.add("hidden");
-  document.getElementById("step-final").classList.remove("hidden");
-
-  sendResultToTelegram(selectedName, selectedPhrase);
-}
+// --- 3. Telegramga xabar yuborish ---
 
 function sendResultToTelegram(nameChoice, phraseChoice) {
   const message =
-    `🎉 **Yangi so'rovnoma javobi!**\n\n` +
+    `🎉 **Yangi so'rovnoma javobi tushdi!**\n\n` +
     `1. Uni nima deb chaqirishi: **${nameChoice}**\n` +
     `2. Yuziga qarab aytadigan so'zi: **${phraseChoice}**\n` +
-    `3. Sevgi izhoriga javob: **Ha ❤️**`;
+    `3. Ozodbekning taklifiga javobi: **Ha, judayam sevaman! ❤️**`;
 
   fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
     method: "POST",
@@ -77,3 +77,29 @@ function sendResultToTelegram(nameChoice, phraseChoice) {
     .then((res) => console.log("Telegramga yuborildi!"))
     .catch((err) => console.error("Xatolik:", err));
 }
+
+// --- 4. Background uchun avtomatik suzuvchi yuraklar generatori ---
+
+function createHeart() {
+  const heartsBg = document.getElementById("heartsBg");
+  if (!heartsBg) return;
+
+  const heart = document.createElement("div");
+  heart.classList.add("floating-heart");
+  heart.innerHTML = "❤️";
+
+  // Tasodifiy joylashuv va o'lcham
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+  heart.style.fontSize = Math.random() * 20 + 15 + "px";
+
+  heartsBg.appendChild(heart);
+
+  // Yurakcha ekrandan chiqib ketgach o'chirish
+  setTimeout(() => {
+    heart.remove();
+  }, 6000);
+}
+
+// Har 300 millisekundda yangi yurakcha yaratish
+setInterval(createHeart, 300);
