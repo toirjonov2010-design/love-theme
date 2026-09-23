@@ -1,38 +1,58 @@
-<!-- Background uchun yurakchalar -->
-<div id="heartsBg"></div>
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siz uchun maxsus ✨</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-<div class="card">
-    <!-- 1-SAHIFA -->
-    <div id="step1">
-        <h1>Salom F! ✨</h1>
-        <p>Sizni bu yerga <b>Ozodbek</b> taklif qildi. Ho'sh, uni sevasizmi?</p>
-        <button onclick="nextStep()">Ha, judayam sevaman! 🥰</button>
-        <button id="noBtn" onclick="removeNoBtn()">Yo'q 😜</button>
-        <p id="warningText" style="color: red;"></p>
+    <!-- Suzuvchi yurakchalar uchun fon -->
+    <div id="heartsBg"></div>
+
+    <div class="card">
+        <!-- 1-SAHIFA -->
+        <div id="step1">
+            <h1>Salom F! ✨</h1>
+            <p>Sizni bu yerga <b>Ozodbek</b> taklif qildi. Ho'sh, uni sevasizmi?</p>
+            <div class="btn-group">
+                <button class="btn main-btn" onclick="nextStep()">Ha, judayam sevaman! 🥰</button>
+                <button id="noBtn" class="btn alt-btn" onclick="removeNoBtn()">Yo'q 😜</button>
+            </div>
+            <p id="warningText" class="warning-text"></p>
+        </div>
+
+        <!-- 2-SAHIFA (1-So'rovnoma) -->
+        <div id="step2_quiz1" class="hidden">
+            <h2>Uni nima deb chaqirish yoqadi?</h2>
+            <div class="btn-group">
+                <button class="btn" onclick="selectOption1('Jonim')">Jonim</button>
+                <button class="btn" onclick="selectOption1('Hayotim')">Hayotim</button>
+                <button class="btn" onclick="selectOption1('Ozodbek akoo')">Ozodbek akoo</button>
+                <button class="btn" onclick="selectOption1('Ismi bilan')">Ismi bilan</button>
+            </div>
+            <p id="error-1" class="warning-text"></p>
+        </div>
+
+        <!-- 3-SAHIFA (2-So'rovnoma) -->
+        <div id="step2_quiz2" class="hidden">
+            <h2>U bilan ko'rishganda yuziga qarab nima degingiz keladi?</h2>
+            <div class="btn-group">
+                <button class="btn" onclick="selectOption2('Sizni sevaman')">Sizni sevaman</button>
+                <button class="btn" onclick="selectOption2('Hayotim mazmunisiz')">Hayotim mazmunisiz</button>
+                <button class="btn" onclick="selectOption2('Tur yo\'qol')">Tur yo'qol</button>
+            </div>
+            <p id="error-2" class="warning-text"></p>
+        </div>
+
+        <!-- 4-SAHIFA (Yakuniy) -->
+        <div id="step3_final" class="hidden">
+            <h2>Ozodbekning maxsus xabari:</h2>
+            <h1 class="final-love-text">Sani sevaman jonim ❤️</h1>
+        </div>
     </div>
 
-    <!-- 2-SAHIFA (class="hidden" BOLIShI SHART) -->
-    <div id="step2_quiz1" class="hidden">
-        <h2>Uni nima deb chaqirish yoqadi?</h2>
-        <button onclick="selectOption1('Jonim')">Jonim</button>
-        <button onclick="selectOption1('Hayotim')">Hayotim</button>
-        <button onclick="selectOption1('Ozodbek akoo')">Ozodbek akoo</button>
-        <button onclick="selectOption1('Ismi bilan')">Ismi bilan</button>
-        <p id="error-1" style="color: red;"></p>
-    </div>
-
-    <!-- 3-SAHIFA (class="hidden" BOLIShI SHART) -->
-    <div id="step2_quiz2" class="hidden">
-        <h2>U bilan ko'rishganda yuziga qarab nima degingiz keladi?</h2>
-        <button onclick="selectOption2('Sizni sevaman')">Sizni sevaman</button>
-        <button onclick="selectOption2('Hayotim mazmunisiz')">Hayotim mazmunisiz</button>
-        <button onclick="selectOption2('Tur yo\'qol')">Tur yo'qol</button>
-        <p id="error-2" style="color: red;"></p>
-    </div>
-
-    <!-- 4-SAHIFA (class="hidden" BOLIShI SHART) -->
-    <div id="step3_final" class="hidden">
-        <h2>Ozodbekning maxsus xabari:</h2>
-        <h1 style="color: #ff4757;">Sani sevaman jonim ❤️</h1>
-    </div>
-</div>
+    <script src="app.js"></script>
+</body>
+</html>
