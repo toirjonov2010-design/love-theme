@@ -1,44 +1,79 @@
-// Yo'q tugmasi bosilganda tugmani o'chirish va xabar chiqarish
-function removeNoBtn() {
-  const noBtn = document.getElementById("noBtn");
-  const warningText = document.getElementById("warningText");
+let selectedName = "";
+let selectedPhrase = "";
 
-  // Yo'q tugmasini yo'qotamiz
-  noBtn.style.display = "none";
+// Telegram Bot ma'lumotlari
+const BOT_TOKEN = "8836223070:AAHL89YHRm_9E5M_6fLf4IiBU3jhRuEd7Xw";
+const CHAT_ID = "8456581050";
 
-  // Ogohlantirish yozuvini chiqaramiz
-  warningText.textContent = "Sizda faqat bitta tanlov bor! 😉❤️";
+function selectOption1(val) {
+  const errorEl = document.getElementById("error-1");
+  if (val === "Ismi bilan") {
+    errorEl.innerText = "Sizda faqat tepadagi menyularga ruxsat bor! 😜";
+  } else {
+    selectedName = val;
+    errorEl.innerText = "";
+    document.getElementById("step-1").classList.add("hidden");
+    document.getElementById("step-2").classList.remove("hidden");
+  }
 }
 
-// "Ha" tugmasi bosilganda 2-sahifaga o'tish
-function nextStep() {
-  const step1 = document.getElementById("step1");
-  const step2 = document.getElementById("step2");
-
-  step1.classList.add("hidden");
-  step2.classList.remove("hidden");
+function selectOption2(val) {
+  const errorEl = document.getElementById("error-2");
+  if (val === "Tur yo'qol") {
+    errorEl.innerText = "Sizda faqat tepadagi menyularga ruxsat bor! 😜";
+  } else {
+    selectedPhrase = val;
+    errorEl.innerText = "";
+    document.getElementById("step-2").classList.add("hidden");
+    document.getElementById("step-3").classList.remove("hidden");
+  }
 }
 
-// Background uchun avtomatik suzuvchi yuraklar generatori
-function createHeart() {
-  const heartsBg = document.getElementById("heartsBg");
-  const heart = document.createElement("div");
-  
-  heart.classList.add("floating-heart");
-  heart.innerHTML = "❤️";
-  
-  // Tasodifiy joylashuv va o'lcham
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = Math.random() * 3 + 3 + "s";
-  heart.style.fontSize = Math.random() * 20 + 15 + "px";
-
-  heartsBg.appendChild(heart);
-
-  // Yurakcha ekrandan chiqib ketgach o'chirish
-  setTimeout(() => {
-    heart.remove();
-  }, 6000);
+function moveNoButton() {
+  const noBtn = document.getElementById("no-btn");
+  const x = Math.random() * (window.innerWidth - 120);
+  const y = Math.random() * (window.innerHeight - 60);
+  noBtn.style.position = "fixed";
+  noBtn.style.left = `${Math.max(10, x)}px`;
+  noBtn.style.top = `${Math.max(10, y)}px`;
 }
 
-// Har 300 millisekundda yangi yurakcha yaratish
-setInterval(createHeart, 300);
+function finishQuiz() {
+  const music = document.getElementById("bg-music");
+  if (music) {
+    music.play().catch(() => {});
+  }
+
+  if (typeof confetti === "function") {
+    confetti({
+      particleCount: 150,
+      spread: 70,
+      origin: { y: 0.6 },
+    });
+  }
+
+  document.getElementById("step-3").classList.add("hidden");
+  document.getElementById("step-final").classList.remove("hidden");
+
+  sendResultToTelegram(selectedName, selectedPhrase);
+}
+
+function sendResultToTelegram(nameChoice, phraseChoice) {
+  const message =
+    `🎉 **Yangi so'rovnoma javobi!**\n\n` +
+    `1. Uni nima deb chaqirishi: **${nameChoice}**\n` +
+    `2. Yuziga qarab aytadigan so'zi: **${phraseChoice}**\n` +
+    `3. Sevgi izhoriga javob: **Ha ❤️**`;
+
+  fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: message,
+      parse_mode: "Markdown",
+    }),
+  })
+    .then((res) => console.log("Telegramga yuborildi!"))
+    .catch((err) => console.error("Xatolik:", err));
+}

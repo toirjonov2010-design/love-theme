@@ -3,40 +3,70 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Maxsus Murojaat ❤️</title>
+    <title>Siz uchun maxsus ❤️</title>
     <link rel="stylesheet" href="style.css" />
+    <!-- Canvas Confetti Library for Fireworks -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   </head>
   <body>
-    <!-- Orqa fondagi suzuvchi yuraklar konteyneri -->
-    <div class="hearts-bg" id="heartsBg"></div>
+    <audio id="bg-music" loop>
+      <source
+        src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
 
-    <!-- Bosh sahifa kartochkasi -->
-    <div class="card" id="step1">
-      <div class="heart-icon">💖</div>
-      <h2>Salom F! ✨</h2>
-      <p class="question">
-        Sizni bu yerga <strong>Ozodbek</strong> taklif qildi. Ho'sh, uni
-        sevasizmi?
-      </p>
-
-      <div class="buttons">
-        <button class="btn btn-yes" onclick="nextStep()">
-          Ha, judayam sevaman! 🥰
-        </button>
-        <button class="btn btn-no" id="noBtn" onclick="removeNoBtn()">
-          Yo'q 😜
-        </button>
+    <div class="card" id="quiz-card">
+      <!-- 1-SAVOL -->
+      <div id="step-1" class="step">
+        <h2>1. Uni nima deb chaqirish yoqadi?</h2>
+        <div class="options">
+          <button onclick="selectOption1('Jonim')">Jonim</button>
+          <button onclick="selectOption1('Hayotim')">Hayotim</button>
+          <button onclick="selectOption1('Ozodbek akoo')">Ozodbek akoo</button>
+          <button onclick="selectOption1('Ismi bilan')">Ismi bilan</button>
+        </div>
+        <p id="error-1" class="error-msg"></p>
       </div>
 
-      <!-- Yo'q tugmasi bosilganda chiqadigan xabar -->
-      <p class="warning-text" id="warningText"></p>
-    </div>
+      <!-- 2-SAVOL -->
+      <div id="step-2" class="step hidden">
+        <h2>2. U bilan ko'rishganda yuziga qarab nima degingiz keladi?</h2>
+        <div class="options">
+          <button onclick="selectOption2('Sizni sevaman')">
+            Sizni sevaman
+          </button>
+          <button onclick="selectOption2('Hayotim mazmunisiz')">
+            Hayotim mazmunisiz
+          </button>
+          <button onclick="selectOption2('Tur yo\'qol')">Tur yo'qol</button>
+        </div>
+        <p id="error-2" class="error-msg"></p>
+      </div>
 
-    <!-- 2-bosqich: Tabrik kartochkasi -->
-    <div class="card hidden" id="step2">
-      <div class="heart-icon pulse">👩‍❤️‍👨</div>
-      <h2>Siz topshiriqdan o'tdingiz! 🎉</h2>
-      <p class="love-message">Ozodbek ham sizni kooo'p sevadi! ❤️✨</p>
+      <!-- MAXSUS XABAR VA SAVOL -->
+      <div id="step-3" class="step hidden">
+        <h1 class="special-msg">Ozodbekning maxsus xabari:</h1>
+        <p class="love-text">Sani sevaman jonim ❤️</p>
+        <h3>Meni sevasizmi?</h3>
+        <div class="btn-group">
+          <button id="yes-btn" onclick="finishQuiz()">Ha ❤️</button>
+          <button
+            id="no-btn"
+            onmouseover="moveNoButton()"
+            onclick="moveNoButton()"
+          >
+            Yo'q 😜
+          </button>
+        </div>
+      </div>
+
+      <!-- YAKUNIY NATIJA -->
+      <div id="step-final" class="step hidden">
+        <h1>Rahmat jonim! 🥰</h1>
+        <p>Javoblaringiz qabul qilindi va Ozodbekka yetkazildi!</p>
+        <canvas id="canvas"></canvas>
+      </div>
     </div>
 
     <script src="app.js"></script>
