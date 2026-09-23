@@ -58,3 +58,6 @@ body {
 #no-btn {
   position: relative;
 }
+.hidden {
+  display: none !important;
+}
