@@ -24,6 +24,7 @@
       <div id="step2" class="step hidden">
         <div class="badge">2-sahifa</div>
         <h2>U haqida qanchalik yaxshi bilasiz?</h2>
+        <h2>U nimani yaxshi ko'radi?</h2>
         <div class="btn-group">
           <button class="btn option-btn" data-next="step3">
             A: Faqat meni
@@ -66,26 +67,34 @@
         <div class="badge">5-sahifa</div>
         <h2>Uni birorta qiz bilan ko'rsangiz nima qilasiz?</h2>
         <div class="btn-group">
-          <button class="btn option-btn" data-next="step6">
+          <button class="btn option-btn step5-option" data-answer="A">
             A: Ikkalasini ham o'ldiraman
           </button>
-          <button class="btn option-btn" data-next="step6">
+          <button class="btn option-btn step5-option" data-answer="B">
             B: Jim qarab turaman
           </button>
-          <button class="btn option-btn" data-next="step6">
+          <button class="btn option-btn step5-option" data-answer="C">
             C: Ahamiyat bermiman
           </button>
         </div>
+        <div class="answer-note hidden" id="step5AnswerNote"></div>
       </div>
 
       <div id="step6" class="step hidden">
         <div class="badge">6-sahifa</div>
-        <h2>Ozodbekning maxsus xabari</h2>
-        <div class="message-box">
-          “U hech qachon sizga hiyonat qilmaydi esingizdan chiqarmang”
+        <h2>
+          Buni sizga yuborgan odam sizni juda sevadi. Ho'sh, siz ham uni
+          sevasizmi?
+        </h2>
+        <div class="final-choices">
+          <button class="btn primary final-btn" id="finalYesBtn">
+            A: Ha, juda sevaman
+          </button>
+          <button class="btn secondary final-no-btn" id="finalNoBtn">
+            B: Yo'q
+          </button>
         </div>
-        <p class="signature">– Ozodbek</p>
-        <button class="btn primary" id="tryAgainBtn">Try Again</button>
+        <p id="finalMessage" class="final-message" aria-live="polite"></p>
       </div>
     </main>
 
