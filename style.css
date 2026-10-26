@@ -1,136 +1,219 @@
+:root {
+  --bg-1: #fff0f5;
+  --bg-2: #ffe0ef;
+  --card-bg: rgba(255, 255, 255, 0.72);
+  --primary: #ff4d8d;
+  --primary-dark: #e93676;
+  --secondary: #ff7aa9;
+  --text: #2d1533;
+  --muted: #5a3f52;
+  --border: rgba(255, 120, 170, 0.28);
+  --shadow: 0 30px 60px rgba(190, 62, 110, 0.18);
+}
+
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  min-height: 100%;
+  height: 100%;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #ffe6ea;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    overflow: hidden;
-    position: relative;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(
+    135deg,
+    var(--bg-1) 0%,
+    var(--bg-2) 50%,
+    #ffdfe9 100%
+  );
+  color: var(--text);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  position: relative;
 }
 
-/* YASHIRISH KLASI (Juda muhim!) */
-.hidden {
-    display: none !important;
+#backgroundGlow {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255, 132, 179, 0.25),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 80% 10%,
+      rgba(255, 179, 214, 0.22),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 60% 85%,
+      rgba(255, 99, 145, 0.18),
+      transparent 32%
+    );
+  z-index: 0;
+  pointer-events: none;
 }
 
-/* Suzuvchi yuraklar konteyneri */
-#heartsBg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.floating-heart {
-    position: absolute;
-    bottom: -20px;
-    animation: floatUp linear infinite;
-    opacity: 0.8;
-}
-
-@keyframes floatUp {
-    0% {
-        transform: translateY(0) scale(0.8);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-105vh) scale(1.2);
-        opacity: 0;
-    }
-}
-
-/* Karta dizayni */
 .card {
-    background: #ffffff;
-    padding: 35px 25px;
-    border-radius: 24px;
-    box-shadow: 0 10px 30px rgba(255, 105, 135, 0.2);
-    text-align: center;
-    max-width: 420px;
-    width: 90%;
-    z-index: 10;
-    position: relative;
+  position: relative;
+  z-index: 1;
+  width: min(500px, 92vw);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 32px 22px;
 }
 
-.card h1 {
-    color: #ff2a55;
-    font-size: 26px;
-    margin-bottom: 12px;
+.step {
+  animation: fadeInUp 0.4s ease;
 }
 
-.card h2 {
-    color: #333333;
-    font-size: 20px;
-    margin-bottom: 18px;
+.hidden {
+  display: none !important;
 }
 
-.card p {
-    color: #555555;
-    font-size: 16px;
-    margin-bottom: 20px;
+.badge {
+  display: inline-block;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgba(255, 77, 141, 0.12);
+  color: var(--primary-dark);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
 }
 
-/* Tugmalar uslubi */
+h1,
+h2 {
+  line-height: 1.2;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+h1 {
+  font-size: clamp(2rem, 4vw, 2.6rem);
+}
+
+h2 {
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+}
+
+p {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
 .btn-group {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .btn {
-    width: 100%;
-    padding: 14px 20px;
-    border: none;
-    border-radius: 14px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    background-color: #ff3366;
-    color: #ffffff;
+  width: 100%;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 16px 18px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .btn:hover {
-    background-color: #e62e5c;
-    transform: translateY(-2px);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 26px rgba(255, 77, 141, 0.18);
 }
 
-.alt-btn {
-    background-color: #f1f2f6;
-    color: #333333;
+.primary {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white;
 }
 
-.alt-btn:hover {
-    background-color: #e4e7eb;
+.secondary {
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--text);
+  border: 1px solid rgba(255, 77, 141, 0.12);
+}
+
+.option-btn {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 77, 141, 0.14);
+  color: var(--text);
+  text-align: left;
+}
+
+.option-btn:hover {
+  background: rgba(255, 247, 250, 0.95);
 }
 
 .warning-text {
-    color: #ff2a55;
-    font-weight: bold;
-    font-size: 14px;
-    margin-top: 12px;
-    min-height: 20px;
+  min-height: 24px;
+  margin-top: 16px;
+  color: var(--primary-dark);
+  font-weight: 700;
 }
 
-.final-love-text {
-    color: #ff2a55;
-    font-size: 32px;
-    margin-top: 15px;
-    animation: pulse 1.5s infinite;
+.message-box {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 109, 168, 0.12),
+    rgba(255, 245, 249, 0.9)
+  );
+  border: 1px solid rgba(255, 77, 141, 0.18);
+  border-radius: 20px;
+  padding: 24px 18px;
+  font-size: 1.15rem;
+  color: var(--text);
+  font-weight: 700;
+  line-height: 1.8;
+  text-align: center;
+  margin: 16px 0 10px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.08); }
-    100% { transform: scale(1); }
+.signature {
+  text-align: right;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 18px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 26px 18px;
+    border-radius: 24px;
+  }
+
+  .btn {
+    padding: 14px 16px;
+  }
 }

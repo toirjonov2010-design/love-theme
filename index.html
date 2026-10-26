@@ -1,58 +1,94 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uz">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siz uchun maxsus ✨</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sevgi testi ✨</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="backgroundGlow"></div>
 
-    <!-- Suzuvchi yurakchalar uchun fon -->
-    <div id="heartsBg"></div>
-
-    <div class="card">
-        <!-- 1-SAHIFA -->
-        <div id="step1">
-            <h1>Salom F! ✨</h1>
-            <p>Sizni bu yerga <b>Ozodbek</b> taklif qildi. Ho'sh, uni sevasizmi?</p>
-            <div class="btn-group">
-                <button class="btn main-btn" onclick="nextStep()">Ha, judayam sevaman! 🥰</button>
-                <button id="noBtn" class="btn alt-btn" onclick="removeNoBtn()">Yo'q 😜</button>
-            </div>
-            <p id="warningText" class="warning-text"></p>
+    <main class="card">
+      <div id="step1" class="step active">
+        <div class="badge">1-sahifa</div>
+        <h1>Salom, senga maxsus bir sahifa 🌸</h1>
+        <p>Bu yerda kichik bir sevgi testi bor. Boshlaymizmi?</p>
+        <div class="btn-group">
+          <button class="btn primary" id="startBtn">Ha, boshlayman 💖</button>
+          <button class="btn secondary" id="noBtn">Yo'q 😅</button>
         </div>
+        <p id="warningText" class="warning-text"></p>
+      </div>
 
-        <!-- 2-SAHIFA (1-So'rovnoma) -->
-        <div id="step2_quiz1" class="hidden">
-            <h2>Uni nima deb chaqirish yoqadi?</h2>
-            <div class="btn-group">
-                <button class="btn" onclick="selectOption1('Jonim')">Jonim</button>
-                <button class="btn" onclick="selectOption1('Hayotim')">Hayotim</button>
-                <button class="btn" onclick="selectOption1('Ozodbek akoo')">Ozodbek akoo</button>
-                <button class="btn" onclick="selectOption1('Ismi bilan')">Ismi bilan</button>
-            </div>
-            <p id="error-1" class="warning-text"></p>
+      <div id="step2" class="step hidden">
+        <div class="badge">2-sahifa</div>
+        <h2>U haqida qanchalik yaxshi bilasiz?</h2>
+        <div class="btn-group">
+          <button class="btn option-btn" data-next="step3">
+            A: Faqat meni
+          </button>
+          <button class="btn option-btn" data-next="step3">
+            B: Faqat o'zini
+          </button>
+          <button class="btn option-btn" data-next="step3">
+            C: Boshqalarni
+          </button>
+          <button class="btn option-btn" data-next="step3">
+            D: Hech kimni
+          </button>
         </div>
+      </div>
 
-        <!-- 3-SAHIFA (2-So'rovnoma) -->
-        <div id="step2_quiz2" class="hidden">
-            <h2>U bilan ko'rishganda yuziga qarab nima degingiz keladi?</h2>
-            <div class="btn-group">
-                <button class="btn" onclick="selectOption2('Sizni sevaman')">Sizni sevaman</button>
-                <button class="btn" onclick="selectOption2('Hayotim mazmunisiz')">Hayotim mazmunisiz</button>
-                <button class="btn" onclick="selectOption2('Tur yo\'qol')">Tur yo'qol</button>
-            </div>
-            <p id="error-2" class="warning-text"></p>
+      <div id="step3" class="step hidden">
+        <div class="badge">3-sahifa</div>
+        <h2>Uning yoshi nechchida?</h2>
+        <div class="btn-group">
+          <button class="btn option-btn" data-next="step4">A: 16</button>
+          <button class="btn option-btn" data-next="step4">B: 15</button>
+          <button class="btn option-btn" data-next="step4">C: 14</button>
         </div>
+      </div>
 
-        <!-- 4-SAHIFA (Yakuniy) -->
-        <div id="step3_final" class="hidden">
-            <h2>Ozodbekning maxsus xabari:</h2>
-            <h1 class="final-love-text">Sani sevaman jonim ❤️</h1>
+      <div id="step4" class="step hidden">
+        <div class="badge">4-sahifa</div>
+        <h2>U bilan qancha vaqt birga bo'lgingiz keladi?</h2>
+        <div class="btn-group">
+          <button class="btn option-btn" data-next="step5">
+            A: Butun umrga
+          </button>
+          <button class="btn option-btn" data-next="step5">B: 1 soatga</button>
+          <button class="btn option-btn" data-next="step5">C: 2 yilga</button>
         </div>
-    </div>
+      </div>
+
+      <div id="step5" class="step hidden">
+        <div class="badge">5-sahifa</div>
+        <h2>Uni birorta qiz bilan ko'rsangiz nima qilasiz?</h2>
+        <div class="btn-group">
+          <button class="btn option-btn" data-next="step6">
+            A: Ikkalasini ham o'ldiraman
+          </button>
+          <button class="btn option-btn" data-next="step6">
+            B: Jim qarab turaman
+          </button>
+          <button class="btn option-btn" data-next="step6">
+            C: Ahamiyat bermiman
+          </button>
+        </div>
+      </div>
+
+      <div id="step6" class="step hidden">
+        <div class="badge">6-sahifa</div>
+        <h2>Ozodbekning maxsus xabari</h2>
+        <div class="message-box">
+          “U hech qachon sizga hiyonat qilmaydi esingizdan chiqarmang”
+        </div>
+        <p class="signature">– Ozodbek</p>
+        <button class="btn primary" id="tryAgainBtn">Try Again</button>
+      </div>
+    </main>
 
     <script src="app.js"></script>
-</body>
+  </body>
 </html>
